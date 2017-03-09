@@ -109,3 +109,22 @@ End Sub
       Debug.Print "最后一个单元格为:"; Rng.Address; "行号为:"; RowN
   End Sub
   ```
+
+- 删除空白行
+
+  ```vbscript
+  Sub delBlankRow()
+      '变量声明
+      Dim RowN        As Long
+      '从最后一行开始循环遍历
+      For RowN = Cells(Rows.Count, "A").End(xlUp).Row To 2 Step -1
+          '判断是否为空行
+          If WorksheetFunction.CountA(Intersect(Rows(RowN), Columns("A:C"))) = 0 Then
+              '若为空行则删除
+              Rows(RowN).Delete shift:=xlShiftUp
+          End If
+      Next RowN
+  End Sub
+  ```
+
+  ​
